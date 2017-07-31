@@ -19,6 +19,10 @@ classdef TestCase
     end
     
     methods
+        function node = xml(self, docNode)
+            node = docNode.createElement('testcase');
+            node.setAttribute('name', self.name);
+        end
     end
     
 end
