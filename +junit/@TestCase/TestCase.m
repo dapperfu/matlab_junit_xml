@@ -23,6 +23,16 @@ classdef TestCase
             node = docNode.createElement('testcase');
             node.setAttribute('name', self.name);
         end
+        function fn(self)
+            fields = fieldnames(self);
+            for idx = i:numel(fields)
+               field = fields{i}; 
+            end
+           disp(fieldnames(self)) 
+        end
+        function get(self, value)
+           disp('Get!'); 
+        end
     end
     
 end
