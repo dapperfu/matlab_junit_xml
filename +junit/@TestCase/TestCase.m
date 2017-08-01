@@ -16,6 +16,7 @@ classdef TestCase
         url
         stdout
         stderr
+       
     end
     
     methods
@@ -24,6 +25,12 @@ classdef TestCase
             fields = fieldnames(self);
             for idx = 1:numel(fields)          
                 field = fields{idx};
+                
+                % Don't put in empty fields.
+                if isempty(self.(field))
+                    continue;
+                end
+                
                 if strcmp(field, 'stdout')
                    stdout = docNode.createElement('system-out'); 
                    stdout.appendChild(docNode.createTextNode(self.stdout));
@@ -40,13 +47,13 @@ classdef TestCase
                 node.setAttribute(field, self.(field))
             end
             
-            sysout = docNode.createElement('system-out');
-sysout.appendChild(docNode.createTextNode(''));
-testcase.appendChild(sysout)
-
-syserr = docNode.createElement('system-err'); 
-syserr.appendChild(docNode.createTextNode(''));
-testcase.appendChild(syserr)
+%             sysout = docNode.createElement('system-out');
+% sysout.appendChild(docNode.createTextNode(''));
+% testcase.appendChild(sysout)
+% 
+% syserr = docNode.createElement('system-err'); 
+% syserr.appendChild(docNode.createTextNode(''));
+% testcase.appendChild(syserr)
 
         end
         function fn(self)

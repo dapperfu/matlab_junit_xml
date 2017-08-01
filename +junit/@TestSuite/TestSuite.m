@@ -15,6 +15,7 @@ classdef TestSuite < handle
         url
         stdout
         stderr
+        
     end
     
     methods
