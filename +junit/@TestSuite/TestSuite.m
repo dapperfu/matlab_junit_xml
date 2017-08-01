@@ -28,7 +28,6 @@ classdef TestSuite < handle
             end
             
             node = docNode.createElement('testsuite');
-            node.setAttribute('name', self.name);
             
             for idx = 1:numel(self.test_cases)
                 test_case = self.test_cases(idx);
