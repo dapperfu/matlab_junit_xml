@@ -24,6 +24,12 @@ classdef TestCase
             fields = fieldnames(self);
             for idx = 1:numel(fields)          
                 field = fields{idx};
+                if strcmp(field, 'stdout')
+                   
+                end
+                if strcmp(field, 'stdout')
+                    
+                end
                 node.setAttribute(field, self.(field))
             end
             
