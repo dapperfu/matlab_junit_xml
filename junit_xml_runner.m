@@ -1,4 +1,4 @@
-delete *.xml;
+delete('*.xml');
 
 tc = junit.TestCase;
 tc.classname = 'some.class.name';
