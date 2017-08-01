@@ -20,18 +20,28 @@ classdef TestCase
     
     methods
         function node = xml(self, docNode)
+            if numel<2
+                docNode = com.mathworks.xml.XMLUtils.createDocument('testsuites');
+                docRootNode = docNode.getDocumentElement;
+            end
+            
             node = docNode.createElement('testcase');
             node.setAttribute('name', self.name);
+            
+            if nargin<2
+                docRootNode.appendChild(node);
+                node = docNode;
+            end
         end
         function fn(self)
             fields = fieldnames(self);
-            for idx = i:numel(fields)
-               field = fields{i}; 
+            for idx = 1:numel(fields)
+                field = fields{idx};
+                disp(field);
             end
-           disp(fieldnames(self)) 
         end
         function get(self, value)
-           disp('Get!'); 
+            disp('Get!');
         end
     end
     
