@@ -25,11 +25,18 @@ classdef TestCase
             for idx = 1:numel(fields)          
                 field = fields{idx};
                 if strcmp(field, 'stdout')
-                   
+                   stdout = docNode.createElement('system-out'); 
+                   stdout.appendChild(docNode.createTextNode(self.stdout));
+                   node.appendChild(stdout);
+                   continue;
                 end
-                if strcmp(field, 'stdout')
-                    
+                if strcmp(field, 'stderr')
+                   stderr = docNode.createElement('system-err'); 
+                   stderr.appendChild(docNode.createTextNode(self.stderr));
+                   node.appendChild(stderr);    
+                   continue;
                 end
+                
                 node.setAttribute(field, self.(field))
             end
             
