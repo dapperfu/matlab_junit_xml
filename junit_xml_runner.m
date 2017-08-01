@@ -8,3 +8,5 @@ tc.stderr = 'I am stderr!';
 ts = junit.TestSuite;
 ts.name = 'my test suite';
 ts.test_cases=[tc];
+
+ts.xmlwrite('x.xml');

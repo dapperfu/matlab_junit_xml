@@ -40,6 +40,10 @@ classdef TestSuite < handle
                 node = docNode;
             end
         end
+        
+        function xmlwrite(self, filename)
+            xmlwrite(filename,self.xml);   
+        end
     end
     
 end
