@@ -21,13 +21,14 @@ classdef TestSuite < handle
         
         function node = xml(self, docNode)
             
-            if numel<2
+            if nargin<2
                 docNode = com.mathworks.xml.XMLUtils.createDocument('testsuites');
                 docRootNode = docNode.getDocumentElement;
             end
             
             node = docNode.createElement('testsuite');
             node.setAttribute('name', self.name);
+            
             for idx = 1:numel(self.test_cases)
                 test_case = self.test_cases(idx);
                 test_case_node = test_case.xml(docNode);
@@ -38,7 +39,6 @@ classdef TestSuite < handle
                 docRootNode.appendChild(node);
                 node = docNode;
             end
-            
         end
     end
     
