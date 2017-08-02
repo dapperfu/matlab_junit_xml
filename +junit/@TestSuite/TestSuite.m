@@ -8,7 +8,7 @@ classdef TestSuite < handle
         hostname = getenv('COMPUTERNAME')
         id
         package
-        timestamp = datestr(now, 31)
+        timestamp = datestr(now,git 31)
         prop
         file
         log
@@ -49,7 +49,6 @@ classdef TestSuite < handle
                 node = docNode;
             end
         end
-        
         
         function xmlwrite(self, filename)
             % Write the test suite xml to a given file name.
