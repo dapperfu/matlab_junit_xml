@@ -45,7 +45,7 @@ classdef TestSuite < handle
                 end                
             end
             
-            node.setAttribute('elapsed_sec', elapsed_sec)
+            node.setAttribute('elapsed_sec', num2str(elapsed_sec))
             
             if nargin<2
                 docRootNode.appendChild(node);
