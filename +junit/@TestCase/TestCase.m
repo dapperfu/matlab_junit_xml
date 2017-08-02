@@ -41,13 +41,16 @@ classdef TestCase < handle
                     continue;
                 end
                 
-                % Skip the message & output fields.
+                % Skip the type, message & output fields.
                 % It is used for the failed, error and skipped Test Case
                 % type and addressed below.
                 if strcmp(field, 'message')
                     continue;
                 end
                 if strcmp(field, 'output')
+                    continue;
+                end
+                if strcmp(field, 'type')
                     continue;
                 end
                 
@@ -146,22 +149,29 @@ classdef TestCase < handle
         
         %% Methods to determine test case state.
         function success = is_success(self)
+            % Return if the test is a success.
             success = self.type == 0;
         end
         function failure = is_failure(self)
+            % Return if the test is a failure.
             failure = self.type == 1;
         end
         function error = is_error(self)
+            % Return if the test is an error.
             error = self.type == 2;
         end
         function skipped = is_skipped(self)
+            % Return if the test is skipped.
             skipped = self.type == 3;
         end
         
         function duration = time(self)
+            % Return the elapsed time of the test.
             if isnumeric(self.elapsed_sec)
+                % If elapsed_sec is numeric, return it as is.
                 duration = self.elapsed_sec;
             else
+                % Otherwise convert the string to a double  first.
                 duration = str2double(self.elapsed_sec);
             end
         end

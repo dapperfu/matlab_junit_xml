@@ -8,7 +8,7 @@ classdef TestSuite < handle
         hostname = getenv('COMPUTERNAME')
         id
         package
-        timestamp = datestr(now,git 31)
+        timestamp = datestr(now, 31)
         prop
         file
         log
