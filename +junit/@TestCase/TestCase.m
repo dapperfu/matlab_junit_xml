@@ -16,7 +16,9 @@ classdef TestCase
         url
         stdout
         stderr
-       
+        
+        message
+        type
     end
     
     methods
@@ -32,15 +34,15 @@ classdef TestCase
                 end
                 
                 if strcmp(field, 'stdout')
-                   stdout = docNode.createElement('system-out'); 
-                   stdout.appendChild(docNode.createTextNode(self.stdout));
-                   node.appendChild(stdout);
+                   stdout_node = docNode.createElement('system-out'); 
+                   stdout_node.appendChild(docNode.createTextNode(self.stdout));
+                   node.appendChild(stdout_node);
                    continue;
                 end
                 if strcmp(field, 'stderr')
-                   stderr = docNode.createElement('system-err'); 
-                   stderr.appendChild(docNode.createTextNode(self.stderr));
-                   node.appendChild(stderr);    
+                   stderr_node = docNode.createElement('system-err'); 
+                   stderr_node.appendChild(docNode.createTextNode(self.stderr));
+                   node.appendChild(stderr_node);    
                    continue;
                 end
                 
@@ -52,15 +54,6 @@ classdef TestCase
                 end
                 node.setAttribute(field, value)
             end
-            
-%             sysout = docNode.createElement('system-out');
-% sysout.appendChild(docNode.createTextNode(''));
-% testcase.appendChild(sysout)
-% 
-% syserr = docNode.createElement('system-err'); 
-% syserr.appendChild(docNode.createTextNode(''));
-% testcase.appendChild(syserr)
-
         end
         function fn(self)
             fields = fieldnames(self);
@@ -79,6 +72,6 @@ classdef TestCase
         function is_skipped(self)
             
         end
-    end    
+    end
 end
 
