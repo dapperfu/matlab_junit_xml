@@ -25,6 +25,11 @@ classdef TestCase < handle
     methods      
         %% Function to generate node.
         function node = xml(self, docNode)
+            if nargin<1
+                
+            end
+            
+            
             % Create a XML Node element from docNode.
             node = docNode.createElement('testcase');
             % Get all of the fields of self.
@@ -48,9 +53,6 @@ classdef TestCase < handle
                     continue;
                 end
                 if strcmp(field, 'output')
-                    continue;
-                end
-                if strcmp(field, 'type')
                     continue;
                 end
                 
