@@ -22,11 +22,30 @@ classdef TestCase < handle
         output
     end
     
-    methods      
+    methods
+        function obj = TestCase(name, 
+            if nargin>1
+                obj.name = name
+            end
+        end
+        
+        
         %% Function to generate node.
+        function xmlwrite(self, filename)
+            [~, ~, ext] = fileparts(filename);
+            if ~strcmpi(ext, '.xml')
+                filename = sprintf('%s.xml', filename);
+            end
+            % Write the test suite xml to a given file name.
+            xmlwrite(filename,self.xml);
+        end
+        
         function node = xml(self, docNode)
-            if nargin<1
-                
+            if nargin<2
+                ts = junit.TestSuite;
+                ts.test_cases = [self];
+                node = ts.xml();
+                return
             end
             
             
