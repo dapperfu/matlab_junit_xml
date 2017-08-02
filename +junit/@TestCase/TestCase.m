@@ -23,9 +23,12 @@ classdef TestCase < handle
     end
     
     methods
-        function obj = TestCase(name, 
+        function obj = TestCase(name, classname)
             if nargin>1
-                obj.name = name
+                obj.name = name;
+            end
+            if nargin>2
+                obj.classname = classname;
             end
         end
         
