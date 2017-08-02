@@ -8,7 +8,7 @@ classdef TestSuite < handle
         hostname = getenv('COMPUTERNAME')
         id
         package
-        timestamp
+        timestamp = datestr(now, 31)
         prop
         file
         log
@@ -29,23 +29,16 @@ classdef TestSuite < handle
             
             node = docNode.createElement('testsuite');
             
-            elapsed_sec = 0;
+            node.setAttribute('elapsed_sec', self.time)
+            node.setAttribute('failures', self.failures)
+            node.setAttribute('errors', self.errors)
+            node.setAttribute('skipped', self.skipped)
             
             for idx = 1:numel(self.test_cases)
                 test_case = self.test_cases(idx);
                 test_case_node = test_case.xml(docNode);
                 node.appendChild(test_case_node);
-                
-                if ~isempty(test_case.elapsed_sec)
-                    if isnumeric(test_case.elapsed_sec)
-                        elapsed_sec = elapsed_sec + test_case.elapsed_sec;                    
-                    else
-                        elapsed_sec = elapsed_sec + str2double(test_case.elapsed_sec);
-                    end
-                end                
             end
-            
-            node.setAttribute('elapsed_sec', num2str(elapsed_sec))
             
             if nargin<2
                 docRootNode.appendChild(node);
@@ -53,17 +46,34 @@ classdef TestSuite < handle
             end
         end
         
+        
+        function xmlwrite(self, filename)
+            xmlwrite(filename,self.xml);
+        end
+        
         function n_tests = tests(self)
             n_tests = numel(self.test_cases);
         end
         
-        function n_success = success(self)
-            
-            
-        function xmlwrite(self, filename)
-            xmlwrite(filename,self.xml);   
+        function n_failures = failures(self)
+            is_failure = arrayfun(@(tc)(tc.is_failure), self.test_cases);
+            n_failures = sprintf('%d', sum(is_failure));
+        end
+        
+        function n_errors = errors(self)
+            is_error = arrayfun(@(tc)(tc.is_error), self.test_cases);
+            n_errors = sprintf('%d', sum(is_error));
+        end
+        
+        function n_skipped = skipped(self)
+            is_skipped = arrayfun(@(tc)(tc.is_error), self.test_cases);
+            n_skipped = sprintf('%d', sum(is_skipped));
+        end
+        
+        function duration = time(self)
+            durations = arrayfun(@(tc)(tc.time), self.test_cases);
+            duration = sprintf('%.2f', sum(durations));
         end
     end
-    
 end
 

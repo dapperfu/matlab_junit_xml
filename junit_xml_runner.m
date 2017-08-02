@@ -23,6 +23,6 @@ tc3.elapsed_sec = 0;
 
 ts = junit.TestSuite;
 ts.name = 'my test suite';
-ts.test_cases=[tc, tc2];
+ts.test_cases=[tc, tc2, tc3];
 
 ts.xmlwrite('test.xml');

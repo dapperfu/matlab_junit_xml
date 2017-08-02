@@ -22,10 +22,7 @@ classdef TestCase < handle
         output
     end
     
-    methods
-        
-        
-        
+    methods      
         %% Function to generate node.
         function node = xml(self, docNode)
             % Create a XML Node element from docNode.
@@ -155,6 +152,14 @@ classdef TestCase < handle
         end
         function skipped = is_skipped(self)
             skipped = self.type == 3;
+        end
+        
+        function duration = time(self)
+            if isnumeric(self.elapsed_sec)
+                duration = self.elapsed_sec;
+            else
+                duration = str2double(self.elapsed_sec);
+            end
         end
     end
 end
