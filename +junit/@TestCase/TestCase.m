@@ -17,8 +17,9 @@ classdef TestCase
         stdout
         stderr
         
-        message
         type
+        message
+        stacktrace
     end
     
     methods
@@ -39,6 +40,13 @@ classdef TestCase
                 % Don't put in empty fields.
                 % Continue.
                 if isempty(self.(field))
+                    continue;
+                end
+                
+                % Skip the message field.
+                % It is used for the failed, error and skipped Test Case
+                % type and addressed below.
+                if strcmp(field, 'message')
                     continue;
                 end
                 
@@ -68,7 +76,7 @@ classdef TestCase
                 if strcmp(field, 'type')
                     switch self.(field)
                         case 0
-                            
+                            continue
                         case 1
                             status_node = docNode.createElement('failure');
                             status_node.setAttribute('type', 'failure');
@@ -81,7 +89,12 @@ classdef TestCase
                         otherwise
                             error('Unknown type: %f', self.(field));
                     end
-                   
+                    if ~isempty(self.message)
+                        
+                    end
+                    if ~isempty(self.stacktrace)
+                        status.appendChild(docNode.createTextNode(self.stderr));
+                    end
                     continue
                 end
                 
@@ -113,17 +126,17 @@ classdef TestCase
             self.type = 3;
             self.message = message;
         end
-        function is_success(self)
-            return self.type == 0
+        function success = is_success(self)
+            success = self.type == 0;
         end
-        function is_failure(self)
-            return self.type == 1
+        function failure = is_failure(self)
+            failure = self.type == 1;
         end
-        function is_error(self)
-            return self.type == 2
+        function error = is_error(self)
+            error = self.type == 2;
         end
-        function is_skipped(self)
-            return self.type == 3
+        function skipped = is_skipped(self)
+            skipped = self.type == 3;
         end
     end
 end
