@@ -29,11 +29,23 @@ classdef TestSuite < handle
             
             node = docNode.createElement('testsuite');
             
+            elapsed_sec = 0;
+            
             for idx = 1:numel(self.test_cases)
                 test_case = self.test_cases(idx);
                 test_case_node = test_case.xml(docNode);
                 node.appendChild(test_case_node);
+                
+                if ~isempty(test_case.elapsed_sec)
+                    if isnumeric(test_case.elapsed_sec)
+                        elapsed_sec = elapsed_sec + test_case.elapsed_sec;                    
+                    else
+                        elapsed_sec = elapsed_sec + str2double(test_case.elapsed_sec);
+                    end
+                end                
             end
+            
+            node.setAttribute('elapsed_sec', elapsed_sec)
             
             if nargin<2
                 docRootNode.appendChild(node);

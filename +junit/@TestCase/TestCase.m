@@ -44,7 +44,13 @@ classdef TestCase
                    continue;
                 end
                 
-                node.setAttribute(field, self.(field))
+                tmp_value = self.(field);
+                if isnumeric(tmp_value)
+                    value = num2str(tmp_value);
+                else
+                    value = tmp_value;
+                end
+                node.setAttribute(field, value)
             end
             
 %             sysout = docNode.createElement('system-out');
