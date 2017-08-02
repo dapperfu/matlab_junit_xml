@@ -15,6 +15,7 @@ classdef TestSuite < handle
         url
         stdout
         stderr
+        
     end
     
     methods
@@ -52,6 +53,13 @@ classdef TestSuite < handle
             end
         end
         
+        function n_tests = tests(self)
+            n_tests = numel(self.test_cases);
+        end
+        
+        function n_success = success(self)
+            
+            
         function xmlwrite(self, filename)
             xmlwrite(filename,self.xml);   
         end

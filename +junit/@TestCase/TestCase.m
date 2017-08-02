@@ -1,4 +1,4 @@
-classdef TestCase
+classdef TestCase < handle
     %TESTCASE Summary of this class goes here
     %   Detailed explanation goes here
     
@@ -116,30 +116,30 @@ classdef TestCase
         
         %% Methods to set non-success messages and outputs.
         function failure(self, message, output)
-               self.type = 1;
-            if isempty(message) || nargin<2
-                self.message='';
+            self.type = 1;
+            if ~isempty(message) && nargin>1
+                self.message=message;
             end
-            if isempty(output) || nargin<3
-                self.output='';
+            if ~isempty(output) && nargin>2
+                self.output=output;
             end
         end
         function error(self, message, output)
             self.type = 2;
-            if isempty(message) || nargin<2
-                self.message='';
+            if ~isempty(message) && nargin>1
+                self.message=message;
             end
-            if isempty(output) || nargin<3
-                self.output='';
+            if ~isempty(output) && nargin>2
+                self.output=output;
             end
         end
         function skipped(self, message, output)
             self.type = 3;
-            if isempty(message) || nargin<2
-                self.message='';
+            if ~isempty(message) && nargin>1
+                self.message=message;
             end
-            if isempty(output) || nargin<3
-                self.output='';
+            if ~isempty(output) && nargin>2
+                self.output=output;
             end
         end
         
