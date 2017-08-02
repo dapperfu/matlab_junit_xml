@@ -3,9 +3,9 @@ classdef TestSuite < handle
     %   Detailed explanation goes here
     
     properties
-        name
-        test_cases
-        hostname
+        name = 'TestSuite'
+        test_cases = []
+        hostname = getenv('COMPUTERNAME')
         id
         package
         timestamp
@@ -15,7 +15,6 @@ classdef TestSuite < handle
         url
         stdout
         stderr
-        
     end
     
     methods

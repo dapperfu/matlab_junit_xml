@@ -5,8 +5,8 @@ classdef TestCase
     properties
         name
         assertions
-        elapsed_sec
-        timestamp
+        elapsed_sec = 0
+        timestamp = datestr(now, 31)
         classname
         status
         category
@@ -14,18 +14,19 @@ classdef TestCase
         line
         log
         url
-        stdout
-        stderr
+        stdout = ''
+        stderr = ''
         
-        type
+        type = 0
         message
-        stacktrace
+        output
     end
     
     methods
         
         
         
+        %% Function to generate node.
         function node = xml(self, docNode)
             % Create a XML Node element from docNode.
             node = docNode.createElement('testcase');
@@ -49,7 +50,6 @@ classdef TestCase
                 if strcmp(field, 'message')
                     continue;
                 end
-                
                 
                 % If the node has standard output (stdout) specified.
                 % Create a node for it with the name system-out.
@@ -90,10 +90,10 @@ classdef TestCase
                             error('Unknown type: %f', self.(field));
                     end
                     if ~isempty(self.message)
-                        
+                        status_node.setAttribute('message', self.message);
                     end
-                    if ~isempty(self.stacktrace)
-                        status.appendChild(docNode.createTextNode(self.stderr));
+                    if ~isempty(self.output)
+                        status_node.appendChild(docNode.createTextNode(self.output));
                     end
                     continue
                 end
@@ -114,18 +114,36 @@ classdef TestCase
             end
         end
         
-        function failure(self, message)
-            self.type = 1;
-            self.message = message;
+        %% Methods to set non-success messages and outputs.
+        function failure(self, message, output)
+               self.type = 1;
+            if isempty(message) || nargin<2
+                self.message='';
+            end
+            if isempty(output) || nargin<3
+                self.output='';
+            end
         end
-        function error(self, message)
+        function error(self, message, output)
             self.type = 2;
-            self.message = message;
+            if isempty(message) || nargin<2
+                self.message='';
+            end
+            if isempty(output) || nargin<3
+                self.output='';
+            end
         end
-        function skipped(self, message)
+        function skipped(self, message, output)
             self.type = 3;
-            self.message = message;
+            if isempty(message) || nargin<2
+                self.message='';
+            end
+            if isempty(output) || nargin<3
+                self.output='';
+            end
         end
+        
+        %% Methods to determine test case state.
         function success = is_success(self)
             success = self.type == 0;
         end
