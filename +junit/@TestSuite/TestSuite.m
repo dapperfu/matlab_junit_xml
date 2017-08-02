@@ -15,21 +15,22 @@ classdef TestSuite < handle
         url
         stdout
         stderr
-        
     end
     
     methods
         
         function node = xml(self, docNode)
-            
+            % If there is no parent testsuites node (no docNode passsed in)
+            % Generate a top level testsuites document;
             if nargin<2
                 docNode = com.mathworks.xml.XMLUtils.createDocument('testsuites');
                 docRootNode = docNode.getDocumentElement;
             end
             
             node = docNode.createElement('testsuite');
-            
+            % Set calculated test suite attributes.
             node.setAttribute('elapsed_sec', self.time)
+            node.setAttribute('tests', self.tests)
             node.setAttribute('failures', self.failures)
             node.setAttribute('errors', self.errors)
             node.setAttribute('skipped', self.skipped)
@@ -41,6 +42,9 @@ classdef TestSuite < handle
             end
             
             if nargin<2
+                % If no parent level testsuites node was passed in
+                % Append the current node to the generated node
+                % and return that.
                 docRootNode.appendChild(node);
                 node = docNode;
             end
@@ -48,29 +52,36 @@ classdef TestSuite < handle
         
         
         function xmlwrite(self, filename)
+            % Write the test suite xml to a given file name.
             xmlwrite(filename,self.xml);
         end
         
+        %% Calculated test suite attributes
         function n_tests = tests(self)
-            n_tests = numel(self.test_cases);
+            % Number of tests.
+            n_tests = sprintf('%d', numel(self.test_cases));
         end
         
         function n_failures = failures(self)
+            % Number of failures.
             is_failure = arrayfun(@(tc)(tc.is_failure), self.test_cases);
             n_failures = sprintf('%d', sum(is_failure));
         end
         
         function n_errors = errors(self)
+            % Number of errors.
             is_error = arrayfun(@(tc)(tc.is_error), self.test_cases);
             n_errors = sprintf('%d', sum(is_error));
         end
         
         function n_skipped = skipped(self)
+            % Number of skipped tests.
             is_skipped = arrayfun(@(tc)(tc.is_error), self.test_cases);
             n_skipped = sprintf('%d', sum(is_skipped));
         end
         
         function duration = time(self)
+            % Total duration spent in a test.
             durations = arrayfun(@(tc)(tc.time), self.test_cases);
             duration = sprintf('%.2f', sum(durations));
         end

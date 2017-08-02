@@ -41,10 +41,13 @@ classdef TestCase < handle
                     continue;
                 end
                 
-                % Skip the message field.
+                % Skip the message & output fields.
                 % It is used for the failed, error and skipped Test Case
                 % type and addressed below.
                 if strcmp(field, 'message')
+                    continue;
+                end
+                if strcmp(field, 'output')
                     continue;
                 end
                 
@@ -92,6 +95,7 @@ classdef TestCase < handle
                     if ~isempty(self.output)
                         status_node.appendChild(docNode.createTextNode(self.output));
                     end
+                    node.appendChild(status_node);
                     continue
                 end
                 
