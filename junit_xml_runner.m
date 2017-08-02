@@ -5,7 +5,7 @@ tc = junit.TestCase;
 tc.classname = 'some.class.name';
 tc.name = 'Test 1';
 tc.elapsed_sec = '1';
-tc.stdout = 'I am stdout!';
+tc.stdout = 'I am stdout!'; 
 tc.stderr = 'I am stderr!';
 tc.error('Error Message', 'Error Output');
 
