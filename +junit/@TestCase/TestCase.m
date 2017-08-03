@@ -40,6 +40,7 @@ classdef TestCase < handle
     end
     
     methods
+        %% Object constructor.
         function obj = TestCase(name, classname)
             if nargin>0
                 obj.name = name;
@@ -49,38 +50,39 @@ classdef TestCase < handle
             end
         end
         %% Methods to set non-success messages and outputs.
-        function failure(self, message, output)
+        function set_message(self, varargin)
+            if nargin==2 && isa(varargin{1}, 'MException')
+                Error = varargin{1};
+                % Get the error message.
+                self.message = Error.message;
+                % Build the stack.
+                self.output = junit.stackDump(Error.stack);
+            end
+            if nargin>1
+                self.message=varargin{1};
+            end
+            if nargin>2
+                self.output=varargin{2};
+            end
+        end
+        
+        function failure(self, varargin)
+            % Mark Test Case as a failure.
             self.type = 1;
-            if ~isempty(message) && nargin>1
-                self.message=message;
-            end
-            if ~isempty(output) && nargin>2
-                self.output=output;
-            end
+            self.set_message(varargin{:})
         end
-        function error(self, message, output)
-            if nargin==2 && isa(message, 'MException')
-                
-                self.message = message.message;
-                self.output = junit.stackDump(self.stack);
-                return
-            end
+        
+        
+        function error(self, varargin)
+            % Mark Test Case as an error.
             self.type = 2;
-            if nargin>1 && ~isempty(message)
-                self.message=message;
-            end
-            if nargin>2 && ~isempty(output)
-                self.output=output;
-            end
+            self.set_message(varargin{:});
         end
-        function skipped(self, message, output)
+        function skipped(self, varargin)
+            % SKIPPED(MESSAGE, OUTPUT)
+            % Mark Test Case as skipped.
             self.type = 3;
-            if ~isempty(message) && nargin>1
-                self.message=message;
-            end
-            if ~isempty(output) && nargin>2
-                self.output=output;
-            end
+            self.set_message(varargin{:});            
         end
         
         %% Methods to determine test case state.
@@ -102,10 +104,10 @@ classdef TestCase < handle
         end
         
         function duration = time(self)
-            % Return the elapsed time of the test.
+            % Return the elapsed time of the test as a double.
             if isnumeric(self.elapsed_sec)
                 % If elapsed_sec is numeric, return it as is.
-                duration = self.elapsed_sec;
+                duration = double(self.elapsed_sec);
             else
                 % Otherwise convert the string to a double  first.
                 duration = str2double(self.elapsed_sec);
