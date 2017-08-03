@@ -34,7 +34,7 @@ classdef TestSuite < handle
     methods
         %% Constructor.
         function obj = TestSuite(name)
-            if nargin>1
+            if nargin>0
                obj.name = name; 
             end            
         end
