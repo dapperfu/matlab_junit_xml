@@ -3,7 +3,7 @@
 % One of each status type.
 
 
-tc = junit.TestCase;
+test_case = junit.TestCase;
 
 tc2 = junit.TestCase;
 tc2.failure('Failure Message', 'Failure Output');
@@ -15,11 +15,11 @@ tc4 = junit.TestCase;
 tc4.skipped('Skipped Message', 'Skipped Output');
 
 % Create test suite.
-ts = junit.TestSuite;
-ts.name = matlab_ipsum('Sentences', 1, 'Paragraphs', 1, 'Words', 2, 'WordsStd', 1);
+test_suite = junit.TestSuite;
+test_suite.name = matlab_ipsum('Sentences', 1, 'Paragraphs', 1, 'Words', 2, 'WordsStd', 1);
 % Add each of the test cases to the test suite.
-ts.test_cases=[tc, tc2, tc3, tc4];
+test_suite.test_cases=[test_case, tc2, tc3, tc4];
 
 %% Output
 % Write the TestCase as an xml file with .m filename.
-tc.xmlwrite(mfilename);
+test_case.xmlwrite(mfilename);
