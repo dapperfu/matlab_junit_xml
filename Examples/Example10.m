@@ -3,28 +3,30 @@
 
 % Create a test suite based on the filename.
 test_suite = junit.TestSuite(sprintf('%s Test Suite', mfilename));
-
 % Number of test cases to create.
 n_test_cases = 100;
-
 % Random integer: [0, 100].
-for random_integer = randi([0, 100], n_test_cases, 1)
+random_integers = randi([0, 100], 1, n_test_cases);
+%
+for idx = 1:numel(random_integers)
+    random_integer = random_integers(idx);
     % Create a test case.
     test_case = junit.TestCase(sprintf('Test Case #%d', random_integer));
     try
         % Complete failure, just skip the test.
-        assert(random_integer<10, 'Catastrophic Failure %d<10. Skipping Test', random_integer);
+        assert(random_integer>10, 'Catastrophic Failure %d<10. Skipping Test', random_integer);
         try
             % Test failed to run.
-            assert(random_integer<20, 'Test Failed: %d<10.', random_integer);
+            assert(random_integer>20, 'Test Failed: %d<20.', random_integer);
             try
                 % Test had an error during run.
-                assert(random_integer<40, 'Error runnining the test: %d<40', random_integer);
-                % 
+                assert(random_integer>40, 'Error runnining the test: %d<40', random_integer);
+                % Passed all the tests, record a success.
                 test_case.stdout=sprintf('Test Success! %d', random_integer);
             catch Error                
                 % Test had an error during execution.
                 test_case.error(Error.identifier, Error.message);
+                % Set the standard error.
                 test_case.stderr=Error.message;
             end
         catch Fail
