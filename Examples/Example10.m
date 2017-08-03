@@ -4,20 +4,25 @@
 test_suite = junit.TestSuite(sprintf('%s Test Suite', mfilename));
 
 for random_integer = randi([0, 100], 100, 1)
-    % Complete failure, just skip the test.
     test_case = junit.TestCase(sprintf('Test Case #%d', random_integer));
+    
+    
     try
+        % Complete failure, just skip the test.
+    
         % Test Failure,
         assert(random_integer<10, 'Catastrophic Failure %d<10. Skipping Test', random_integer);
         try
-            
-        catch Error
-                    test_case.fail(Error.identifier, Error.message)
-
-            
+            try
+                
+            catch Error
+                test_case.error(Error.identifier, Error.message);
+            end
+        catch Fail
+            test_case.fail(Fail.identifier, Fail.message);     
         end
-    catch PassError
-        test_case.fail(PassError.identifier, PassError.message)
+    catch Skip
+        test_case.skipped(Skip.identifier, Skip.message)
     end
     test_suite.append(test_case);
     % test_suite.test_cases = [test_suite.test_cases, test_case];
