@@ -3,76 +3,30 @@ classdef TestSuite < handle
     %   Detailed explanation goes here
     
     properties
-        name = 'TestSuite'
+        name = ''
         test_cases = []
         hostname = getenv('COMPUTERNAME')
         id
-        package
-        timestamp = datestr(now, 31)
+        package 
+        timestamp = datestr(now, 31) % Default to current time.
         prop
         file
         log
         url
-        stdout
-        stderr
     end
     
     methods
-        function node = xml(self, docNode)
-            % If there is no parent testsuites node (no docNode passsed in)
-            % Generate a top level testsuites document;
-            if nargin<2
-                docNode = com.mathworks.xml.XMLUtils.createDocument('testsuites');
-                docRootNode = docNode.getDocumentElement;
-            end
-            
-            node = docNode.createElement('testsuite');
-            % Set calculated test suite attributes.
-            node.setAttribute('elapsed_sec', self.time)
-            node.setAttribute('tests', self.tests)
-            node.setAttribute('failures', self.failures)
-            node.setAttribute('errors', self.errors)
-            node.setAttribute('skipped', self.skipped)
-            
-            % For each of the test cases.
-            for idx = 1:numel(self.test_cases)
-                % Get the test case.
-                test_case = self.test_cases(idx);
-                % Get the test case node.
-                test_case_node = test_case.xml(docNode);
-                % Add it to the test suite.
-                node.appendChild(test_case_node);
-            end
-            
-            if nargin<2
-                % If no parent level testsuites node was passed in
-                % Append the current node to the generated node
-                % and return that.
-                docRootNode.appendChild(node);
-                node = docNode;
-            end
-        end
-        
-        function xmlwrite(self, filename)
-            [~, ~, ext] = fileparts(filename);
-            if ~strcmpi(ext, '.xml')
-                filename = sprintf('%s.xml', filename);
-            end
-            % Write the test suite xml to a given file name.
-            xmlwrite(filename,self.xml);
-        end
-        
-        function plus(self, other)
-            if isa(other, 'junit.TestCase')
-                self.append(other);
-                return
-            end
-            error('Unknown additive class');
-        end
-        
         %% TestCase
         function append(self, testcase)
             self.test_cases = [self.test_cases, testcase];
+        end
+        % Aliases
+        function add(self, testcase)
+            self.append(testcase);
+        end
+        % testsuite + testcase.
+        function plus(self, testcase)
+           self.append(testcase); 
         end
         
         %% Calculated test suite attributes
