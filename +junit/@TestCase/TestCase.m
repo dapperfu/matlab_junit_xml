@@ -153,11 +153,15 @@ classdef TestCase < handle
             end
         end
         function error(self, message, output)
+            if nargin==2 && isa(message, 'MException')
+                self.message = message.message;
+                return
+            end
             self.type = 2;
-            if ~isempty(message) && nargin>1
+            if nargin>1 && ~isempty(message)
                 self.message=message;
             end
-            if ~isempty(output) && nargin>2
+            if nargin>2 && ~isempty(output)
                 self.output=output;
             end
         end
