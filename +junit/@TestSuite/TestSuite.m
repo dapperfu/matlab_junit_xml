@@ -16,6 +16,12 @@ classdef TestSuite < handle
     end
     
     methods
+        %%
+        function obj = TestSuite(name)
+            if nargin>1
+               obj.name = name; 
+            end            
+        end
         %% TestCase
         function append(self, testcase)
             self.test_cases = [self.test_cases, testcase];
