@@ -22,7 +22,7 @@ classdef TestSuite < handle
         name = 'TestSuite' % Default test suite name.
         test_cases = [] % List to store the test cases.
         hostname = getenv('COMPUTERNAME') % Default to the current machine.
-        id 
+        id = '0';
         package  = 'matlab'
         timestamp = datestr(now, 31) % Default to current time.
         prop
