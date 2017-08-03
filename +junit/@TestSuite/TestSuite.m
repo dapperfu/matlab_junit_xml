@@ -1,13 +1,20 @@
 classdef TestSuite < handle
-    %TESTSUITE Summary of this class goes here
-    %   Detailed explanation goes here
+    %TESTSUITE JUNIT TEST SUITE OBJECT.
+    %   TestSuite object for outputting Jenkins compatible junit xml files.
+    %
+    %
+    % Example:
+    %
+    % Taken from python-junit-xml:
+    % https://github.com/kyrus/python-junit-xml/blob/master/junit_xml/__init__.py
+    % TODO: prop(erties)    %
     
     properties
-        name = ''
-        test_cases = []
-        hostname = getenv('COMPUTERNAME')
-        id
-        package 
+        name = 'TestSuite' % Default test suite name.
+        test_cases = [] % List to store the test cases.
+        hostname = getenv('COMPUTERNAME') % Default to the current machine.
+        id 
+        package  = 'matlab'
         timestamp = datestr(now, 31) % Default to current time.
         prop
         file
