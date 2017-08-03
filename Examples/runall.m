@@ -10,8 +10,8 @@ files = dir(cwd);
 for idx = 1:numel(files)
     % Get the current file.
     file = files(idx);
-    % If the filename starts with example.
-    if strncmp(file.name, 'Example', 7)
+    % If the filename starts with Example and ends with .m.
+    if strncmp(file.name, 'Example', 7) && strcmpi(file.name(end-2), '.m')
         % Run it.
         run(file.name);
     end

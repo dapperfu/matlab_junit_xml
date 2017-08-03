@@ -3,7 +3,7 @@ classdef TestCase < handle
     %   Test case object for outputting Jenkins compatible junit xml files.
     %
     %   TestSuite(name) creates a test suite with given name.
-    % 
+    %
     % Example:
     %   test_case = TestCase('Minimal JUnit Test Case')
     %   test_case.xmlwrite('junit.xml')
@@ -57,12 +57,14 @@ classdef TestCase < handle
                 self.message = Error.message;
                 % Build the stack.
                 self.output = junit.stackDump(Error.stack);
-            end
-            if nargin>1
-                self.message=varargin{1};
-            end
-            if nargin>2
-                self.output=varargin{2};
+                return;
+            else
+                if nargin>1
+                    self.message=varargin{1};
+                end
+                if nargin>2
+                    self.output=varargin{2};
+                end
             end
         end
         
@@ -82,7 +84,7 @@ classdef TestCase < handle
             % SKIPPED(MESSAGE, OUTPUT)
             % Mark Test Case as skipped.
             self.type = 3;
-            self.set_message(varargin{:});            
+            self.set_message(varargin{:});
         end
         
         %% Methods to determine test case state.
@@ -115,4 +117,3 @@ classdef TestCase < handle
         end
     end
 end
-
