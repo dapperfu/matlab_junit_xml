@@ -16,7 +16,7 @@ classdef TestSuite < handle
     %
     % Attributes taken from python-junit-xml:
     % https://github.com/kyrus/python-junit-xml/blob/master/junit_xml/__init__.py
-    % TODO: prop(erties)    %
+    % TODO: prop(erties)
     
     properties
         name = 'TestSuite' % Default test suite name.

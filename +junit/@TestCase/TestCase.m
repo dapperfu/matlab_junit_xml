@@ -1,7 +1,24 @@
 classdef TestCase < handle
-    %TESTCASE Summary of this class goes here
-    %   Detailed explanation goes here
-    
+    %TESTCASE JUnit test case object.
+    %   Test case object for outputting Jenkins compatible junit xml files.
+    %
+    %   TestSuite(name) creates a test suite with given name.
+    % 
+    % Example:
+    %   test_case = TestCase('Minimal JUnit Test Case')
+    %   test_case.xmlwrite('junit.xml')
+    %
+    %   test_suite = TestSuite;
+    %   test_case = TestCase('Example Test Case 1');
+    %   test_suite.append(test_case);
+    %   % Return xml node
+    %   node = test_suite.xml;
+    %   % Write the xml to a file.
+    %   test_suite.xmlfile('junit.xml');
+    %
+    %
+    % Attributes taken from python-junit-xml:
+    % https://github.com/kyrus/python-junit-xml/blob/master/junit_xml/__init__.py
     properties
         name
         assertions
@@ -18,8 +35,8 @@ classdef TestCase < handle
         stderr = ''
         
         type = 0
-        message
-        output
+        message = ''
+        output = ''
     end
     
     methods
@@ -31,117 +48,6 @@ classdef TestCase < handle
                 obj.classname = classname;
             end
         end
-        
-        
-        %% Function to generate node.
-        function xmlwrite(self, filename)
-            [~, ~, ext] = fileparts(filename);
-            if ~strcmpi(ext, '.xml')
-                filename = sprintf('%s.xml', filename);
-            end
-            % Write the test suite xml to a given file name.
-            xmlwrite(filename,self.xml);
-        end
-        
-        function node = xml(self, docNode)
-            if nargin<2
-                ts = junit.TestSuite;
-                ts.test_cases = [self];
-                node = ts.xml();
-                return
-            end
-            
-            
-            % Create a XML Node element from docNode.
-            node = docNode.createElement('testcase');
-            % Get all of the fields of self.
-            fields = fieldnames(self);
-            % For each of the object fields.
-            for idx = 1:numel(fields)
-                % Pull out the field name from the field cell array based
-                % on the loop index.
-                field = fields{idx};
-                
-                % Don't put in empty fields.
-                % Continue.
-                if isempty(self.(field))
-                    continue;
-                end
-                
-                % Skip the type, message & output fields.
-                % It is used for the failed, error and skipped Test Case
-                % type and addressed below.
-                if strcmp(field, 'message')
-                    continue;
-                end
-                if strcmp(field, 'output')
-                    continue;
-                end
-                
-                % If the node has standard output (stdout) specified.
-                % Create a node for it with the name system-out.
-                if strcmp(field, 'stdout')
-                    stdout_node = docNode.createElement('system-out');
-                    stdout_node.appendChild(docNode.createTextNode(self.stdout));
-                    % Append it to the node.
-                    node.appendChild(stdout_node);
-                    % Continue to loop through fields.
-                    continue;
-                end
-                
-                % If the node has standard error (stderr) specified.
-                % Create a node for it with the name system-err.
-                if strcmp(field, 'stderr')
-                    stderr_node = docNode.createElement('system-err');
-                    stderr_node.appendChild(docNode.createTextNode(self.stderr));
-                    % Append it to the node.
-                    node.appendChild(stderr_node);
-                    % Continue to loop through.
-                    continue;
-                end
-                
-                if strcmp(field, 'type')
-                    switch self.(field)
-                        case 0
-                            continue
-                        case 1
-                            status_node = docNode.createElement('failure');
-                            status_node.setAttribute('type', 'failure');
-                        case 2
-                            status_node = docNode.createElement('error');
-                            status_node.setAttribute('type', 'error');
-                        case 3
-                            status_node = docNode.createElement('skipped');
-                            status_node.setAttribute('type', 'skipped');
-                        otherwise
-                            error('Unknown type: %f', self.(field));
-                    end
-                    if ~isempty(self.message)
-                        status_node.setAttribute('message', self.message);
-                    end
-                    if ~isempty(self.output)
-                        status_node.appendChild(docNode.createTextNode(self.output));
-                    end
-                    node.appendChild(status_node);
-                    continue
-                end
-                
-                
-                % Get the value of the field.
-                tmp_value = self.(field);
-                % If it is numeric.
-                if isnumeric(tmp_value)
-                    % Convert it to a string.
-                    value = num2str(tmp_value);
-                else
-                    % If it is not, pass it through.
-                    value = tmp_value;
-                end
-                % Set the test attribute field with given value.
-                node.setAttribute(field, value)
-            end
-        end
-        
         %% Methods to set non-success messages and outputs.
         function failure(self, message, output)
             self.type = 1;
@@ -154,7 +60,9 @@ classdef TestCase < handle
         end
         function error(self, message, output)
             if nargin==2 && isa(message, 'MException')
+                
                 self.message = message.message;
+                self.output = junit.stackDump(self.stack);
                 return
             end
             self.type = 2;
