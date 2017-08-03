@@ -8,7 +8,7 @@ end
 
 node = docNode.createElement('testsuite');
 % Set calculated test suite attributes.
-node.setAttribute('elapsed_sec', self.time)
+node.setAttribute('time', self.elapsed_sec)
 node.setAttribute('tests', self.tests)
 node.setAttribute('failures', self.failures)
 node.setAttribute('errors', self.errors)

@@ -22,7 +22,7 @@ classdef TestCase < handle
     properties
         name
         assertions
-        elapsed_sec = 0
+        time = 0
         timestamp = datestr(now, 31)
         classname
         status
@@ -105,14 +105,14 @@ classdef TestCase < handle
             skipped = self.type == 3;
         end
         
-        function duration = time(self)
+        function duration = elapsed_sec(self)
             % Return the elapsed time of the test as a double.
-            if isnumeric(self.elapsed_sec)
+            if isnumeric(self.time)
                 % If elapsed_sec is numeric, return it as is.
-                duration = double(self.elapsed_sec);
+                duration = double(self.time);
             else
-                % Otherwise convert the string to a double  first.
-                duration = str2double(self.elapsed_sec);
+                % Otherwise convert the string to a double first.
+                duration = str2double(self.time);
             end
         end
     end

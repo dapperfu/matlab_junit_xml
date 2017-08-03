@@ -19,7 +19,7 @@ for r = rand(1, 10)
         test_case.skipped(sprintf('Skipped: %s!', message), sprintf('!! Error!!\n'));
     end
     % Random elapsed time.
-    test_case.elapsed_sec=r*100+10;
+    test_case.time=r*100+10;
     % Filler stdout.
     test_case.stdout = matlab_ipsum('Sentences', 2, 'Paragraphs', 1);
     test_suite.append(test_case); 

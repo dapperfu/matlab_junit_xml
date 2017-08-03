@@ -85,9 +85,9 @@ classdef TestSuite < handle
             n_skipped = sprintf('%d', sum(is_skipped));
         end
         
-        function duration = time(self)
+        function duration = elapsed_sec(self)
             % Return the durations of each of the test cases.
-            durations = arrayfun(@(tc)(tc.time), self.test_cases);
+            durations = arrayfun(@(tc)(tc.elapsed_sec), self.test_cases);
             % Sum the durations and return it as a string for addAttribute.
             duration = sprintf('%.2f', sum(durations));
         end
