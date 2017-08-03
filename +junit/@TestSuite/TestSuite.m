@@ -62,6 +62,14 @@ classdef TestSuite < handle
             xmlwrite(filename,self.xml);
         end
         
+        function plus(self, other)
+            if isa(other, 'junit.TestCase')
+                self.append(other);
+                return
+            end
+            error('Unknown additive class');
+        end
+        
         %% TestCase
         function append(self, testcase)
             self.test_cases = [self.test_cases, testcase];
