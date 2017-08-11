@@ -2,6 +2,10 @@
 % Change to the directory of this .m-script.
 cwd = fileparts(mfilename('fullpath'));
 
+[~, junit_xml_path] = fileattrib(fullfile(cwd, '..'));
+
+addpath(junit_xml_path.Name);
+
 % Get all files in this directory.
 files = dir(cwd);
 % For all of the files in this directory.

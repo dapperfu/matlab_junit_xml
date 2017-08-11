@@ -1,38 +1,80 @@
 <deployment-project plugin="plugin.toolbox" plugin-version="1.0">
   <configuration file="C:\Projects\junit-xml-ml\junit-xml-ml.prj" location="C:\Projects\junit-xml-ml" name="junit-xml-ml" target="target.toolbox" target-name="Package Toolbox">
     <param.appname>junit-xml-ml</param.appname>
-    <param.authnamewatermark>Jedediah Frey</param.authnamewatermark>
+    <param.authnamewatermark>Jed Frey</param.authnamewatermark>
     <param.email>jed-frey@users.noreply.github.com</param.email>
-    <param.company />
+    <param.company>None</param.company>
     <param.summary>Creates JUnit XML test result documents that can be read by tools such as Jenkins.</param.summary>
     <param.description>Creates JUnit XML test result documents that can be read by tools such as Jenkins. Aims to be the Matlab equivalent of junit-xml for Python.
 
-A Matlab class for creating JUnit XML test result documents that can be read by tools such as Jenkins. If you are ever working with test tool or test suite written in Matlab and want to take advantage of Jenkins' pretty graphs and test reporting capabilities, this module will let you generate the XML test reports.</param.description>
-    <param.screenshot />
-    <param.version>1.0.0.1</param.version>
+A Matlab class for creating JUnit XML test result documents that can be read by tools such as Jenkins. If you are ever working with test tool or test suite written in Matlab and want to take advantage of Jenkins' graphs and test reporting capabilities, this module will let you generate the XML test reports.</param.description>
+    <param.screenshot>${PROJECT_ROOT}\XML.png</param.screenshot>
+    <param.version>1.0</param.version>
     <param.output>${PROJECT_ROOT}\junit-xml-ml.mltbx</param.output>
     <param.products.name />
     <param.products.id />
     <param.products.version />
     <param.platforms />
-    <param.guid>8c5b4774-9673-4430-ad1a-d222ec7b4f8d</param.guid>
-    <param.exclude.filters />
-    <param.examples />
+    <param.guid>2b369048-e6a5-4feb-ad5d-69830ad4eb17</param.guid>
+    <param.exclude.filters>**/.git
+**/tools</param.exclude.filters>
+    <param.examples>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;examples&gt;
+   &lt;exampleCategory name="Examples"&gt;
+      &lt;example name="Example01" type="html"&gt;
+         &lt;file type="source"&gt;/Examples/html/Example01.html&lt;/file&gt;
+         &lt;file type="main"&gt;/Examples/Example01.m&lt;/file&gt;
+         &lt;file type="thumbnail"/&gt;
+      &lt;/example&gt;
+      &lt;example name="Example02" type="html"&gt;
+         &lt;file type="source"&gt;/Examples/html/Example02.html&lt;/file&gt;
+         &lt;file type="main"&gt;/Examples/Example02.m&lt;/file&gt;
+         &lt;file type="thumbnail"/&gt;
+      &lt;/example&gt;
+      &lt;example name="Example03" type="html"&gt;
+         &lt;file type="source"&gt;/Examples/html/Example03.html&lt;/file&gt;
+         &lt;file type="main"&gt;/Examples/Example03.m&lt;/file&gt;
+         &lt;file type="thumbnail"/&gt;
+      &lt;/example&gt;
+      &lt;example name="Example04" type="html"&gt;
+         &lt;file type="source"&gt;/Examples/html/Example04.html&lt;/file&gt;
+         &lt;file type="main"&gt;/Examples/Example04.m&lt;/file&gt;
+         &lt;file type="thumbnail"/&gt;
+      &lt;/example&gt;
+      &lt;example name="Example10" type="html"&gt;
+         &lt;file type="source"&gt;/Examples/html/Example10.html&lt;/file&gt;
+         &lt;file type="main"&gt;/Examples/Example10.m&lt;/file&gt;
+         &lt;file type="thumbnail"/&gt;
+      &lt;/example&gt;
+      &lt;example name="Example11" type="html"&gt;
+         &lt;file type="source"&gt;/Examples/html/Example11.html&lt;/file&gt;
+         &lt;file type="main"&gt;/Examples/Example11.m&lt;/file&gt;
+         &lt;file type="thumbnail"/&gt;
+      &lt;/example&gt;
+      &lt;example name="Example12" type="html"&gt;
+         &lt;file type="source"&gt;/Examples/html/Example12.html&lt;/file&gt;
+         &lt;file type="main"&gt;/Examples/Example12.m&lt;/file&gt;
+         &lt;file type="thumbnail"/&gt;
+      &lt;/example&gt;
+      &lt;example name="Example13" type="html"&gt;
+         &lt;file type="source"&gt;/Examples/html/Example13.html&lt;/file&gt;
+         &lt;file type="main"&gt;/Examples/Example13.m&lt;/file&gt;
+         &lt;file type="thumbnail"/&gt;
+      &lt;/example&gt;
+   &lt;/exampleCategory&gt;
+&lt;/examples&gt;</param.examples>
     <param.demosxml />
     <param.apps />
     <param.docs />
     <param.matlabpath.excludes />
     <param.javaclasspath.excludes />
     <unset>
-      <param.company />
-      <param.screenshot />
+      <param.version />
       <param.output />
       <param.products.name />
       <param.products.id />
       <param.products.version />
       <param.platforms />
-      <param.exclude.filters />
-      <param.examples />
       <param.demosxml />
       <param.apps />
       <param.docs />
@@ -40,12 +82,19 @@ A Matlab class for creating JUnit XML test result documents that can be read by 
       <param.javaclasspath.excludes />
     </unset>
     <fileset.rootdir>
-      <file>${PROJECT_ROOT}\junit-xml-ml</file>
+      <file>C:\Projects\junit-xml-ml</file>
     </fileset.rootdir>
     <fileset.rootfiles>
-      <file>${PROJECT_ROOT}\junit-xml-ml\+junit</file>
+      <file>${PROJECT_ROOT}\+junit</file>
+      <file>${PROJECT_ROOT}\demos.xml</file>
+      <file>${PROJECT_ROOT}\Examples</file>
+      <file>${PROJECT_ROOT}\junit-xml-ml</file>
+      <file>${PROJECT_ROOT}\LICENSE</file>
+      <file>${PROJECT_ROOT}\README.md</file>
+      <file>${PROJECT_ROOT}\XML.png</file>
     </fileset.rootfiles>
-    <fileset.depfun.included>
+    <fileset.depfun.included />
+    <fileset.depfun.excluded>
       <file>C:\Users\C3038028\Documents\MATLAB\+junit\@TestCase\TestCase.m</file>
       <file>C:\Users\C3038028\Documents\MATLAB\+junit\@TestCase\xml.m</file>
       <file>C:\Users\C3038028\Documents\MATLAB\+junit\@TestCase\xmlwrite.m</file>
@@ -53,8 +102,8 @@ A Matlab class for creating JUnit XML test result documents that can be read by 
       <file>C:\Users\C3038028\Documents\MATLAB\+junit\@TestSuite\xml.m</file>
       <file>C:\Users\C3038028\Documents\MATLAB\+junit\@TestSuite\xmlwrite.m</file>
       <file>C:\Users\C3038028\Documents\MATLAB\+junit\stackDump.m</file>
-    </fileset.depfun.included>
-    <fileset.depfun.excluded />
+      <file>C:\Users\C3038028\Documents\MATLAB\len.m</file>
+    </fileset.depfun.excluded>
     <fileset.package />
     <build-deliverables>
       <file location="C:\Projects\junit-xml-ml" name="junit-xml-ml.mltbx" optional="false">C:\Projects\junit-xml-ml\junit-xml-ml.mltbx</file>
