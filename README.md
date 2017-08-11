@@ -16,5 +16,28 @@ This makes it difficult to shoehorn into legacy code bases I've inherited.
 
 # Examples
 
+- [Example 01](https://htmlpreview.github.io/?https://github.com/jed-frey/matlab_junit_xml/blob/master/Examples/html/Example01.html)
+  Minimal xml file generated from a single test case.
 
-[See Examples folder](https://github.com/jed-frey/matlab_junit_xml/tree/master/Examples).
+- [Example 02](https://htmlpreview.github.io/?https://github.com/jed-frey/matlab_junit_xml/blob/master/Examples/html/Example02.html)
+  JUnit xml file generated from multiple tests. One of each status type.
+
+- [Example 03](https://htmlpreview.github.io/?https://github.com/jed-frey/matlab_junit_xml/blob/master/Examples/html/Example03.html)
+  Generate test cases and add them to a test suite in a loop.
+
+- [Example 04](https://htmlpreview.github.io/?https://github.com/jed-frey/matlab_junit_xml/blob/master/Examples/html/Example04.html)
+  Generate test cases and add them to a test suite in a loop. Pass, fail, error and skip tests based on randomly generated number.
+
+- [Example 10](https://htmlpreview.github.io/?https://github.com/jed-frey/matlab_junit_xml/blob/master/Examples/html/Example10.html)
+  Full 'real world' example with passing, skipping & errors.
+
+- [Example 11](https://htmlpreview.github.io/?https://github.com/jed-frey/matlab_junit_xml/blob/master/Examples/html/Example11.html)
+  Full 'real world' example with only errors.
+
+- [Example 12](https://htmlpreview.github.io/?https://github.com/jed-frey/matlab_junit_xml/blob/master/Examples/html/Example12.html)
+  Tested functions to get stack.
+
+- [Example 13](https://htmlpreview.github.io/?https://github.com/jed-frey/matlab_junit_xml/blob/master/Examples/html/Example13.html)
+  ~~Ab~~Using globals to keep track of test cases.
+
+[See Examples folder for ```.m``` source code.](https://github.com/jed-frey/matlab_junit_xml/tree/master/Examples).
