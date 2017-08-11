@@ -24,6 +24,7 @@ call tools\\run_examples.bat
 @ECHO OFF
 call tools\\packager.bat
 '''
+                archiveArtifacts artifacts: '*.mltbx, *.log', caseSensitive: false, fingerprint: true, onlyIfSuccessful: true
             }
         }
     }
