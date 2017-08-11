@@ -17,6 +17,7 @@ for idx = 1:numel(random_integers)
 end
 % Write the TestCase as an xml file with .m filename.
 test_suite.xmlwrite(mfilename);
+type([mfilename '.xml']);
 end
 
 function test_case = fcn2(random_integer, idx)

@@ -13,5 +13,7 @@ for idx = 1:numel(files)
         % Run it.
         fprintf('Running: %s\n', file.name);
         run(file.name);
+        fprintf('Publishing: %s\n', file.name);
+        publish(file.name);
     end
 end

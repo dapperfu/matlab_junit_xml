@@ -7,3 +7,5 @@ test_case = junit.TestCase;
 test_case.stdout = matlab_ipsum;
 % Write the TestCase as an xml file with .m filename.
 test_case.xmlwrite(mfilename);
+
+type([mfilename '.xml']);

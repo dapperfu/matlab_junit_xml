@@ -14,6 +14,7 @@ random_integers = randi([0, 100], 1, n_test_cases);
 fcn1(random_integers);
 % Write the TestCase as an xml file with .m filename.
 test_suite.xmlwrite(mfilename);
+type([mfilename '.xml']);
 end
 
 function fcn1(random_integers)

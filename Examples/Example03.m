@@ -11,3 +11,4 @@ end
 
 % Write the TestCase as an xml file with .m filename.
 test_suite.xmlwrite(mfilename);
+type([mfilename '.xml']);

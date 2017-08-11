@@ -23,3 +23,4 @@ test_suite.test_cases=[test_case, tc2, tc3, tc4];
 %% Output
 % Write the TestCase as an xml file with .m filename.
 test_case.xmlwrite(mfilename);
+type([mfilename '.xml']);
