@@ -16,4 +16,5 @@ This makes it difficult to shoehorn into legacy code bases I've inherited.
 
 # Examples
 
-Forthcoming.
+
+[See Examples folder](https://github.com/jed-frey/matlab_junit_xml/tree/master/Examples).

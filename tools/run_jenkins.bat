@@ -44,7 +44,7 @@ set LOG_FILE=%WORKSPACE%\%RUN_CMD%.log
 
 :: Run Matlab.
 ECHO ############## Starting Matlab: %RUN_CMD% ##############
-set CMD="C:\Program Files\MATLAB\%MATLAB_VER%\bin\matlab.exe" -nosplash -minimize -wait -logfile "%LOG_FILE%" -r "cd('%SCRIPT_DIR%');run('%RUN_CMD%');exit(1);"
+set CMD="C:\Program Files\MATLAB\%MATLAB_VER%\bin\matlab.exe" -nosplash -minimize -wait -logfile "%LOG_FILE%" -r "cd('%SCRIPT_DIR%');try;run('%RUN_CMD%');catch Error;disp(getReport(Error));exit(1);end;exit(0);"
 echo %CMD%
 %CMD%
 

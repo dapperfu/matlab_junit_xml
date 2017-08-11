@@ -9,7 +9,7 @@
 
 A Matlab class for creating JUnit XML test result documents that can be read by tools such as Jenkins. If you are ever working with test tool or test suite written in Matlab and want to take advantage of Jenkins' graphs and test reporting capabilities, this module will let you generate the XML test reports.</param.description>
     <param.screenshot>${PROJECT_ROOT}\XML.png</param.screenshot>
-    <param.version>1.0</param.version>
+    <param.version>1.0.0.1</param.version>
     <param.output>${PROJECT_ROOT}\junit-xml-ml.mltbx</param.output>
     <param.products.name />
     <param.products.id />
@@ -69,7 +69,6 @@ A Matlab class for creating JUnit XML test result documents that can be read by 
     <param.matlabpath.excludes />
     <param.javaclasspath.excludes />
     <unset>
-      <param.version />
       <param.output />
       <param.products.name />
       <param.products.id />

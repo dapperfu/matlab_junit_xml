@@ -1,13 +1,15 @@
 %% Run All Tests
-% Change to the directory of this .m-script.
 cwd = fileparts(mfilename('fullpath'));
 
 [~, junit_xml_path] = fileattrib(fullfile(cwd, '..'));
+[~, junit_xml_examples] = fileattrib(fullfile(cwd, '..', 'Examples'));
 
 addpath(junit_xml_path.Name);
 
 % Get all files in this directory.
-files = dir(cwd);
+cd(junit_xml_examples.Name);
+files = dir(junit_xml_examples.Name);
+
 % For all of the files in this directory.
 for idx = 1:numel(files)
     % Get the current file.
