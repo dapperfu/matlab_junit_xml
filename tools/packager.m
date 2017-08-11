@@ -41,6 +41,22 @@ for idx = 1:numel(projects)
     else
         proj = fullfile(root, project.name);
     end
+    
+    % The toolbox root is an absolute path. When using Jenkins this is
+    % never always known. Start a new service and force root path to the
+    % folder that contains the .prj.
+    service = com.mathworks.toolbox_packaging.services.ToolboxPackagingService;
+    % Open the project.
+    proj_name = service.openProject(proj);
+    % Remove the existing root.
+    service.removeToolboxRoot(proj_name);
+    % Add a new toolbox root.
+    service.setToolboxRoot(proj_name, fileparts(proj))
+    % Save the project.
+    service.save(proj_name);
+    % Close the project.
+    service.closeProject(proj_name)
+    
     % Package the toolbox.
     matlab.addons.toolbox.packageToolbox(proj);
     % Print status update.
