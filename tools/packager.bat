@@ -1,2 +1,2 @@
 @ECHO OFF
-call run_jenkins %0
+call %~dp0run_jenkins %0
