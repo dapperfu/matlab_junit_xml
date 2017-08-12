@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.toolbox" plugin-version="1.0">
-  <configuration file="C:\Projects\junit-xml-ml\junit-xml-ml.prj" location="C:\Projects\junit-xml-ml" name="junit-xml-ml" target="target.toolbox" target-name="Package Toolbox">
+  <configuration file="C:\matlab_junit_xml\junit-xml-ml.prj" location="C:\matlab_junit_xml" name="junit-xml-ml" target="target.toolbox" target-name="Package Toolbox">
     <param.appname>junit-xml-ml</param.appname>
     <param.authnamewatermark>Jed Frey</param.authnamewatermark>
     <param.email>jed-frey@users.noreply.github.com</param.email>
@@ -9,7 +9,7 @@
 
 A Matlab class for creating JUnit XML test result documents that can be read by tools such as Jenkins. If you are ever working with test tool or test suite written in Matlab and want to take advantage of Jenkins' graphs and test reporting capabilities, this module will let you generate the XML test reports.</param.description>
     <param.screenshot>${PROJECT_ROOT}\XML.png</param.screenshot>
-    <param.version>1.0.0.7</param.version>
+    <param.version>1.0.0.8</param.version>
     <param.output>${PROJECT_ROOT}\junit-xml-ml.mltbx</param.output>
     <param.products.name />
     <param.products.id />
@@ -82,7 +82,7 @@ A Matlab class for creating JUnit XML test result documents that can be read by 
       <param.javaclasspath.excludes />
     </unset>
     <fileset.rootdir>
-      <file>C:\Projects\junit-xml-ml</file>
+      <file>C:\matlab_junit_xml</file>
     </fileset.rootdir>
     <fileset.rootfiles>
       <file>${PROJECT_ROOT}\+junit</file>
@@ -93,9 +93,7 @@ A Matlab class for creating JUnit XML test result documents that can be read by 
       <file>${PROJECT_ROOT}\Jenkinsfile</file>
       <file>${PROJECT_ROOT}\junit-xml-ml.prj</file>
       <file>${PROJECT_ROOT}\LICENSE</file>
-      <file>${PROJECT_ROOT}\MyMetrics.xml</file>
       <file>${PROJECT_ROOT}\README.md</file>
-      <file>${PROJECT_ROOT}\slprj</file>
       <file>${PROJECT_ROOT}\tools</file>
       <file>${PROJECT_ROOT}\XML.png</file>
     </fileset.rootfiles>
@@ -103,7 +101,7 @@ A Matlab class for creating JUnit XML test result documents that can be read by 
     <fileset.depfun.excluded />
     <fileset.package />
     <build-deliverables>
-      <file location="C:\Projects\junit-xml-ml" name="junit-xml-ml.mltbx" optional="false">C:\Projects\junit-xml-ml\junit-xml-ml.mltbx</file>
+      <file location="C:\matlab_junit_xml" name="junit-xml-ml.mltbx" optional="false">C:\matlab_junit_xml\junit-xml-ml.mltbx</file>
     </build-deliverables>
     <workflow />
     <matlab>
