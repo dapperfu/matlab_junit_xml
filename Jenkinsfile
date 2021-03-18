@@ -7,6 +7,12 @@ pipeline {
       }
     }
 
+    stage('Archive Artifacts') {
+      steps {
+        junit '**/*.xml'
+      }
+    }
+
   }
   triggers {
     cron('0 0 * * *')
